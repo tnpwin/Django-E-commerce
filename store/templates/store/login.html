@@ -1,0 +1,35 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section id="login-form">
+    <div class="forms-img-login">
+        <div class="forms-container">
+            <div class="forms-header">
+                <h2>LOGIN</h2>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-field">
+                    {{form.username.label_tag}}<br>
+                    {{form.username}}
+                </div>
+                <div class="form-field">
+                    {{form.password.label_tag}}<br>
+                    {{form.password}}
+                </div>
+                <div class="form-field"> 
+                    <button class=" button button-primary" type="submit">LOGIN</button>
+                </div>
+            </form>
+            <p>Don't have an account ? <a class="link-text" href="{% url 'register-page' %}"> Register</a></p>
+        </div>
+    </div>
+
+</section>
+
+
+
+{% endblock content %}

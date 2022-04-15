@@ -1,0 +1,60 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section class="history-detail-items">
+    <div class="container">
+        <div class="card-detail-title">
+            <h2>HOW TO ORDER?</h2>
+        </div>
+        <hr>
+        <div class="howto-detail">
+            <div class="detail-items">
+                <img  src="{% static 'store/images/member_icon.png' %}" alt="icon">
+                <p>1. Register as member watchtime shop.</p>
+            </div>
+            
+            <img class="arrow" src="{% static 'store/images/arrow_icon.png' %}" alt="icon">
+            
+            <div class="detail-items">
+                <img src="{% static 'store/images/bag_icon.png' %}" alt="icon">
+                <p>2. Shopping products through our online store.</p>
+            </div>
+           
+       
+            <img class="arrow" src="{% static 'store/images/arrow_icon.png' %}" alt="icon">
+            
+            <div class="detail-items">
+                <img src="{% static 'store/images/kbank-logo.png' %}" alt="icon" width="80">
+                <img src="{% static 'store/images/krung-thai.png' %}" alt="icon" width="60">
+                <p>3. Make the payment by direct bank transfer. </p>
+            </div>
+
+            <img class="arrow" src="{% static 'store/images/arrow_icon.png' %}" alt="icon">
+  
+            <div class="detail-items">
+                <p>4. Confirm your payment after make the payment. </p>
+            </div>
+           
+            <img class="arrow" src="{% static 'store/images/arrow_icon.png' %}" alt="icon">
+            
+            <div class="detail-items">
+                <img src="{% static 'store/images/pending_icon.png' %}" alt="icon" width="70">
+                <p>5. Wait for checking of your payment amount.</p>
+            </div>
+            
+            <img class="arrow" src="{% static 'store/images/arrow_icon.png' %}" alt="icon">
+            
+            <div class="detail-items">
+                <img src="{% static 'store/images/shipping_icon1.png' %}" alt="icon">
+                <p>6. Your order will be shipped after payment amout has been checked. </p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock content %}

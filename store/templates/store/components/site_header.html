@@ -1,0 +1,69 @@
+{% load static %}
+<nav class="note">
+    <p>Note: โปรเจ็คเว็บนี้ทำขึ้นมาเพื่อการศึกษาทางการเขียนโปรแกรมเท่านั้น เนื้อหาบนเว็บไม่ใช่สินค้าหรือบริการที่มีอยู่จริง</p>
+    <p><a href="#">Project code on GitHub</a></p>
+</nav>
+<nav id="navbar-header">
+    <div class="container">
+        <div class="nav-top">
+            <div class="description">
+                <h5>FREE SHIPPING ON ALL ORDER</h5> 
+            </div>
+            
+            <ul class="account">
+                {% if user.is_authenticated %} 
+                    <li id="username"><h4>Hi! {{user.username}}</h4></li>
+                    <li>
+                        <div class="dropdown">
+                            {% if user.profile.avatar %}
+                            <img class="user-account" src="{{user.profile.avatar.url}}" alt="user_default">
+                            {% endif %}
+                            <div class="dropdown-items">
+                                <a href="{% url 'profile' %}">My Account</a>
+                                <a href="{% url 'history-page' %}">History</a>
+                                <hr>
+                                <a href="{% url 'logout-page' %}">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+
+                {% else %}
+                    <li><a class="active" href="{% url 'login-page' %}">login</a></li> 
+                    <li><a href="{% url 'register-page' %}">Register</a></li>
+                {% endif %}
+            </ul> 
+        </div>
+    </div>
+</nav>
+<nav id="navbar-bottom">
+    <div class="container">
+        <div class="nav-bottom">
+            <div class="logo">
+                <h2><a href="{% url 'home-page' %}">WATCHTIME</a></h2>
+            </div>
+            <ul class="menu">
+                <li><a href="{% url 'home-page' %}">HOME</a></li>
+                <li><a href="{% url 'products-page' %}">PRODUCTS</a></li>
+                <li><a href="{% url 'howto-page' %}">HOW TO ORDER</a></li>
+                <li><a href="{% url 'payment-page' %}">PAYMENT</a></li> 
+                 
+            </ul>
+            <ul class="responsive-menu">
+                <li><a href="{% url 'home-page' %}"><img src="{% static 'store/images/home_icon.png' %}" alt="Home"></a></li>
+                <li><a href="{% url 'products-page' %}"><img src="{% static 'store/images/product_icon1.png' %}" alt="Products"></a></li>
+                <li><a href="{% url 'howto-page' %}"><img src="{% static 'store/images/howto_icon.png' %}" alt="How to"></a></li>
+                <li><a href="{% url 'payment-page' %}"><img src="{% static 'store/images/payment_icon.png' %}" alt="Payment"></a></li>
+            </ul>
+            
+            <div class="card">
+                <a href="{% url 'card-detail' %}"><img src="{% static 'store/images/basket_icon.png' %}" alt="basket-icon" width="25px">
+                    {% if count_items != 0 %}
+                    <sup>{{count_items}}</sup>
+                    {% else %}
+                    <sup>0</sup>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

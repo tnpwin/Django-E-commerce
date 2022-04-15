@@ -1,0 +1,85 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section class="card-detail">
+    <div class="container">
+        <div class="card-detail-title">
+            <h2>CARD DETAILS</h2>
+        </div>
+        <hr>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="message-alert">
+                {{message}}
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="table-container">
+            {% if not card_items %}
+            <div class="emtly-container"></div>
+            {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                <table class="card-detail-table">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Color</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+    
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    {% for item in card_items %}
+                    <tr>
+                        <td><a href="{% url 'product' item.product.id %}"><img src="{{item.product.relative_image.url}}" alt="product-img"></a><br>{{item.product.category_name}} {{item.product.brand_name}}</td>
+                        <td>{{item.product.color}}</td>
+                        {% if item.product.premium_price  %}
+                            <td>฿ {{item.product.premium_price|intcomma}}</td>
+                        {% else %}
+                            <td>฿ {{item.product.normal_price|intcomma}}</td>
+                        {% endif %}
+                        <td>{{item.quantity}}</td>
+                        <td>฿ {{item.sub_total | intcomma}}</td>
+                        <td><a class="remove-item" href="{% url 'removeCard' item.product.id %}">delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br>
+                <h3>Delivery Informations</h3>
+                <br>
+                <section class="order-form">
+                    <div class="field-order">
+                        {{form.name.label_tag}}
+                        {{form.name}}
+                    </div>
+                    <div class="field-order">
+                        {{form.address.label_tag}}
+                        {{form.address}}
+                    </div>
+                    <div class="field-order">
+                        {{form.city.label_tag}}
+                        {{form.city}}
+                    </div>
+                    <div class="field-order">
+                        {{form.postcode.label_tag}}
+                        {{form.postcode}}
+                    </div>
+                    <div class="field-order">
+                        {{form.tel.label_tag}}
+                        {{form.tel}}
+                    </div>
+                </section>
+                <section class="total-price">
+                    <h3>Total : ฿ {{total | intcomma}}</h3>
+                    <button id="confirmation" class=" button button-primary" type="submit">PURCHASE</button>
+                </section>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock content %}

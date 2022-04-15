@@ -1,0 +1,46 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<section class="profile">
+    <div class="container">
+        <h2>MY ACCOUNT</h2>
+        <hr>
+        {% for message in messages %}
+        <div class="message-alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        <main id="profile-info">
+            <aside class="profile-image">
+                {% if user.profile.avatar %}
+                <img class="profile-img" src="{{ user.profile.avatar.url }} ">
+                {% endif %}
+            </aside>
+            <aside class="profile-user">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="info-field">
+                        {{user_form.first_name.label}}
+                        <br>
+                        <input type="text" name="first_name" maxlength="150" id="id_first_name" value="{{user.first_name}}">
+                    </div>
+                    <div class="info-field">
+                        {{user_form.last_name.label}}
+                        <br>
+                        <input type="text" name="last_name" maxlength="150" id="id_last_name" value="{{user.last_name}}">
+                    </div>
+                    <div class="info-field">
+                        {{profile_form.as_p}}
+                    </div>
+                    <button class=" button button-primary" type="submit">UPDATE</button>
+                </form>
+                <a href="{% url 'change-password' %}" class=" button button-reset" >Change Password</a>
+            </aside>
+        </main>
+    </div>
+</section>
+
+{% endblock content %}

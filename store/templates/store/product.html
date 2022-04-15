@@ -1,0 +1,57 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section class="product-id">
+    <div class="container">
+        <div class="product-title">
+            <h3>{{product.category_name}} | {{product.brand_name}}</h3>
+        </div>
+        
+        <div class="flex-product-id">
+            <div class="relative-img">
+                <img src="{{product.relative_image.url}}" alt="product_by_id">
+            </div>
+            <div class="detail-product">
+                <h4>PRODUCT DETAIL</h4>
+                <p><b>Case</b></p>
+                <span>Color : {{product.color}}</span><br>
+                {% if product.diameter is not None %}
+                    <span>Case Diameter : {{product.diameter}} mm.</span><br>
+                    <span>Case Thickness : {{product.thickness}} mm.</span><br>
+                {% endif %}
+                <br>
+                {% if product.lens is not None %}
+                    <p><b>Lens</b></p>
+                    <span>Materials : {{product.lens}}.</span><br>
+                    <br>
+                {% endif %}
+                <p><b>Warranty 1 year</b></p>
+                <hr>
+                <br>
+                {% if product.premium_price  %}
+                    <span>฿ {{product.premium_price|intcomma}}</span>
+                    <del><span>฿ {{product.normal_price|intcomma}}</span></del><br>
+                {% else %}
+                    <span>฿ {{product.normal_price|intcomma}}</span><br>
+                {% endif %}
+                <br>
+                <span>In stock: {{product.quantity}}</span><br>
+                <br>
+
+                {% if product.quantity != 0 %}
+                        <a href="{% url 'addCard' product.id  %}">Add to card</a>
+                    {% else %}
+                        <p class="unsubmit">Out of stocks</p>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+{% endblock content %}

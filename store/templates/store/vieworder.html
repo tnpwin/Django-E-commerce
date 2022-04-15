@@ -1,0 +1,55 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section class="history-detail-item">
+    <div class="container">
+        <h3>Purchase Order #{{id_order}}</h3>
+        <hr>
+        <main class="header-item">
+            <aside class="vender">
+                <h4><b>Vender :</b></h4>
+                <br>
+                <p>WatchTime Co.,Ltd.</p>
+                <span>123/2008 Bangkok Thailand</span>
+                <span>40000</span>
+            </aside>
+            <aside class="customer">
+                <h4>Customer:</h4>
+                <br>
+                <p>{{id_order.name}}</p>
+                <p>{{id_order.address}}</p>
+                <p>{{id_order.city}} {{id_order.postcode}}</p>
+                <p>{{id_order.tel}}</p>
+            </aside>
+        </main>
+        <table class="card-detail-table">
+            <tr>
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+            {% for item in item_order %}
+            <tr class="show-detail">
+                <td>WT{{item.id}}</td>
+                <td>{{item.category}} {{item.product}}</td>
+                <td>{{item.color}}</td>
+                <td>฿ {{item.price|intcomma}}</td>
+                <td>{{item.quantity}}</td>
+                <td>฿ {{item.sub_total | intcomma}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <section class="total-price">
+            <h3>Total : ฿ {{id_order.total | intcomma}}</h3>
+        </section>
+    </div>
+        
+</section>
+
+{% endblock content %}

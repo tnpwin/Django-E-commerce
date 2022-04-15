@@ -1,0 +1,31 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<section class="payment">
+    <div class="container">
+        <h2>PAYMENT CONFIRMATION</h2>
+        <hr>
+        {% for message in messages %}
+        <div class="message-alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        <form id="payment-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-field">
+                {{form.label}}
+                {{form.as_p}}
+            </div>
+            <button class=" button button-primary" type="submit">Send</button>
+            <button class=" button button-reset" type="reset">Reset</button>
+            
+        </form>
+    </div>
+</section>
+
+
+{% endblock content %}

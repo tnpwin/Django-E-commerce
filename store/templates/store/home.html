@@ -1,0 +1,52 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<section id="img-header">
+    <div class="product-banner">
+        <div class="hero-text">
+            <h1 style="font-size:50px">UNIQUE AS YOU</h1>
+            <a href="{% url 'products-page' %}">SHOP NOW</a>
+        </div>
+    </div>
+</section>
+
+<section id="product-show">
+    <div class="container">
+        <div class="product-title">
+            <h2>NEW ARRIVAL</h2>
+        </div>
+        
+        <div class="product-grid">
+            {% for products in new_product %}
+                {% if forloop.counter < 9  %}
+                <div class="grid-items">
+                    <a href="{% url 'product' products.id %}"><img src="{{products.relative_image.url}}" alt="watch-items"></a>
+                    <figcaption>
+                        <hr>
+                        <h5>{{products.category_name}} {{products.brand_name}} | {{products.color}} </h5>
+                    {% if products.premium_price  %}
+                        <span>฿ {{products.premium_price|intcomma}}</span>
+                        <del><span>฿ {{products.normal_price|intcomma}}</span></del><br>
+                    {% else %}
+                        <span>฿ {{products.normal_price|intcomma}}</span>
+                    {% endif %}
+                    </figcaption>
+                    {% if products.quantity != 0 %}
+                        <a class="submit" href="{% url 'addCard' products.id  %}">Add to card</a>
+                    {% else %}
+                        <p class="unsubmit">Out of stocks</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="product-footer-title">
+           <a href="{% url 'products-page' %}">View All Products</a>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+
+
+<section id="product-show"> 
+    <div class="container">
+        <div class="products-title">
+            {% for category in links  %}
+            <li><a href="{{category.get_url}}">{{category.name}}</a></li>
+            {% endfor %}
+        </div>
+        <div class="product-grid">
+            {% for products in page  %}
+                <div class="grid-items">
+                    <a href="{% url 'product' products.id %}"><img src="{{products.relative_image.url}}" alt="watch-items"></a>
+                    <figcaption>
+                        <hr>
+                        <h5>{{products.category_name}} {{products.brand_name}} | {{products.color}} </h5>
+                    {% if products.premium_price  %}
+                        <span>฿ {{products.premium_price|intcomma}}</span>
+                        <del><span>฿ {{products.normal_price|intcomma}}</span></del><br>
+                    {% else %}
+                        <span>฿ {{products.normal_price|intcomma}}</span>
+                    {% endif %}
+                    </figcaption>
+                    <br>
+                    {% if products.quantity != 0 %}
+                        <a class="submit" href="{% url 'addCard' products.id  %}">Add to card</a>
+                    {% else %}
+                        <p class="unsubmit">Out of stocks</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <br>
+        <section class="pagination">
+            <span class="step-links">
+                {% if page.has_previous %}
+                    <a href="?page={{ page.previous_page_number }}">&laquo; Previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page.number }} of {{ page.paginator.num_pages }}.
+                </span>
+        
+                {% if page.has_next %}
+                    <a href="?page={{ page.next_page_number }}">Next &raquo;</a>
+                {% endif %}
+            </span>
+        </section>
+        
+    </div>
+</section>
+<br>
+
+
+{% endblock content %}

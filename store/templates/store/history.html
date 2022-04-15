@@ -1,0 +1,54 @@
+{% extends 'store/components/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section class="history-detail">
+    <div class="container">
+        <div class="card-detail-title">
+            <h2>ORDER HISTORY</h2>
+        </div>
+        <hr>
+        <div class="table-container">
+            {% if not orders %}
+            <div class="emtly-container"></div>
+            {% else %}
+
+            <table class="card-detail-table">
+                <tr>
+                    <th>Purchase No.</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Detail</th>
+                    
+                </tr>
+                {% for item in page %}
+                <tr>
+                    <td>#{{item.id}}</td>
+                    <td>{{item.created_on | date:'d M y'}}</td>
+                    <td>฿ {{item.total | intcomma}}</td>
+                    <td><a href="{% url 'order-detail' item.id %}" class="button button-primary">Detail</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<section class="pagination">
+    <span class="step-links">
+        {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}">&laquo; Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page.number }} of {{ page.paginator.num_pages }}.
+        </span>
+
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}">Next &raquo;</a>
+        {% endif %}
+    </span>
+</section>
+
+{% endblock content %}
