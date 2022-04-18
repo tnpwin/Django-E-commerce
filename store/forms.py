@@ -1,6 +1,4 @@
-from cProfile import label
-from dataclasses import fields
-from django.forms import ModelForm
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 from django.contrib.auth.models import User
@@ -21,11 +19,11 @@ class OrderForm(forms.ModelForm):
     address = forms.CharField(max_length=255, required=True)
     city = forms.CharField(max_length=255, required=True)
     postcode = forms.CharField(max_length=255)
-    tel = forms.CharField(max_length=10)
+    telephone = forms.CharField(max_length=255)
     
     class Meta:
         model = Order
-        fields = ['name','address','city','postcode','tel']
+        fields = ['name','address','city','postcode','telephone']
 
 
 class UserUpdateForm(forms.ModelForm):

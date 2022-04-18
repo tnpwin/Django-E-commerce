@@ -20,7 +20,7 @@ class CardItemsAdmin(admin.ModelAdmin):
 admin.site.register(CardItem)
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display=['username','name','address','city','postcode','tel','email','total','updated_on']
+    list_display=['username','name','address','city','postcode','telephone','email','total','updated_on']
     list_per_page = 15
 admin.site.register(Order, OrderAdmin)
 

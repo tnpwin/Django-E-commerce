@@ -17,6 +17,8 @@
             <aside class="profile-image">
                 {% if user.profile.avatar %}
                 <img class="profile-img" src="{{ user.profile.avatar.url }} ">
+                {% else %}
+                <img class="profile-img" src="{% static 'store/images/default.png' %}" alt="user_default">
                 {% endif %}
             </aside>
             <aside class="profile-user">

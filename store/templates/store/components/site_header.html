@@ -17,6 +17,8 @@
                         <div class="dropdown">
                             {% if user.profile.avatar %}
                             <img class="user-account" src="{{user.profile.avatar.url}}" alt="user_default">
+                            {% else %}
+                            <img class="user-account" src="{% static 'store/images/default.png' %}" alt="user_default">
                             {% endif %}
                             <div class="dropdown-items">
                                 <a href="{% url 'profile' %}">My Account</a>

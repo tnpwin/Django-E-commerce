@@ -635,22 +635,16 @@ th {
 
 /* change password form section */
 .user-password{
-    height: 680px;
+    height: 770px;
 }
 
-form.change-password {
-    padding: 10px 200px;
-    /* background-color:#085dbd; */
-}
 .show{
     text-align: center;
     margin-top: 3px;
 
 }
 .show-image{
-    background: red;
     align-items: center;
-
 }
 
 /* payment-form section */
@@ -741,5 +735,8 @@ form.change-password {
     }
     .menu{
         display:none;
+    }
+    form.change-password {
+        padding: 10px;
     }
   } 

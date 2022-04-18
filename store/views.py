@@ -152,7 +152,7 @@ def cardDetail(request):
                 address = request.POST['address']
                 city = request.POST['city']
                 postcode = request.POST['postcode']
-                tel = request.POST['tel']
+                telephone = request.POST['telephone']
                 order = Order.objects.create(
                     username = username,
                     email = email,
@@ -161,7 +161,7 @@ def cardDetail(request):
                     city = city,
                     postcode = postcode,
                     total = total,
-                    tel = tel,
+                    telephone = telephone,
                 )
                 order.save()
                 
@@ -276,8 +276,6 @@ def payment(request):
     context = {'form': form}
     return render(request, 'store/payment.html',context)
 
-def thank(request):
-    return render(request,'store/thank.html')
 
 def howtoOrder(request):
     return render(request, 'store/howto_order.html')
